@@ -99,6 +99,10 @@ def test_all_classic_profiles_are_explicit_and_revision_pinned() -> None:
     assert "bin/mspdb60.dll" in msvc60.required_producers
     assert msvc60.required_runtime_files == ("bin/rcdll.dll",)
     assert msvc60.source_for_path("bin/cl.exe") == msvc60.sources[0]
+    assert (msvc60.sources[0].repository, msvc60.sources[0].revision) == (
+        "https://github.com/HorvathAlteisen/msvc600sp6.git",
+        "09a7da2bb42b6b5954ea31f1520eb0009f573b3a",
+    )
 
 
 def test_toolchain_lock_detects_producer_drift(tmp_path: Path) -> None:

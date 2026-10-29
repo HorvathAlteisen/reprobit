@@ -214,11 +214,8 @@ _MSVC60_PRODUCERS = (
 )
 _MSVC60_INPUT_ROOTS = ("include", "mfc/include", "atl/include", "lib", "mfc/lib")
 _MSVC60_RUNTIME = ("bin/rcdll.dll",)
-# TODO(vc6-sp6): replace with the published VC6 SP6 repository and its full
-# commit hash once it exists.  The placeholder is syntactically valid so the
-# profile can be modeled and tested with fake installations like the 5.0 ones.
-_MSVC60_SP6_REPOSITORY = "https://github.com/OWNER/msvc600sp6.git"
-_MSVC60_SP6_REVISION = "0000000000000000000000000000000000000000"
+_MSVC60_SP6_REPOSITORY = "https://github.com/HorvathAlteisen/msvc600sp6.git"
+_MSVC60_SP6_REVISION = "09a7da2bb42b6b5954ea31f1520eb0009f573b3a"
 
 _PROFILES = {
     MSVC_42: ToolchainProfile(
