@@ -32,6 +32,7 @@ MSVC_50_RTM = "msvc_5_0_rtm"
 MSVC_50_SP1 = "msvc_5_0_sp1"
 MSVC_50_SP2 = "msvc_5_0_sp2"
 MSVC_50_SP3 = "msvc_5_0_sp3"
+MSVC_60_SP6 = "msvc_6_0_sp6"
 TREE_RECEIPT_ALGORITHM: Literal["portable-tree-v1"] = "portable-tree-v1"
 
 _TREE_MAX_ENTRIES = 200_000
@@ -196,6 +197,28 @@ _MSVC50_PRODUCERS = (
 )
 _MSVC50_INPUT_ROOTS = ("include", "mfc/include", "atl/include", "lib", "mfc/lib")
 _MSVC50_RUNTIME = ("bin/msdis100.dll",)
+# Visual C++ 6.0 SP6 (compiler 12.00.8804): the code generator became a DLL
+# (c2.dll), the program database moved to mspdb60.dll, and rc.exe imports
+# rcdll.dll.  link.exe 6.00 loads msdis110.dll only for disassembly dumps, so
+# it is not a build input.
+_MSVC60_PRODUCERS = (
+    "bin/cl.exe",
+    "bin/c1.dll",
+    "bin/c1xx.dll",
+    "bin/c2.dll",
+    "bin/mspdb60.dll",
+    "bin/link.exe",
+    "bin/lib.exe",
+    "bin/rc.exe",
+    "bin/cvtres.exe",
+)
+_MSVC60_INPUT_ROOTS = ("include", "mfc/include", "atl/include", "lib", "mfc/lib")
+_MSVC60_RUNTIME = ("bin/rcdll.dll",)
+# TODO(vc6-sp6): replace with the published VC6 SP6 repository and its full
+# commit hash once it exists.  The placeholder is syntactically valid so the
+# profile can be modeled and tested with fake installations like the 5.0 ones.
+_MSVC60_SP6_REPOSITORY = "https://github.com/OWNER/msvc600sp6.git"
+_MSVC60_SP6_REVISION = "0000000000000000000000000000000000000000"
 
 _PROFILES = {
     MSVC_42: ToolchainProfile(
@@ -326,6 +349,31 @@ _PROFILES = {
             compiler_frontend_form="dynamic_library", pdb_generation="5.0"
         ),
         required_runtime_files=_MSVC50_RUNTIME,
+    ),
+    MSVC_60_SP6: ToolchainProfile(
+        identifier=MSVC_60_SP6,
+        display_name="Microsoft Visual C++ 6.0 SP6",
+        family="msvc",
+        release="6.0-sp6",
+        sources=(
+            ToolchainSourcePin(
+                repository=_MSVC60_SP6_REPOSITORY,
+                revision=_MSVC60_SP6_REVISION,
+                paths=(*_MSVC60_PRODUCERS, *_MSVC60_INPUT_ROOTS, *_MSVC60_RUNTIME),
+            ),
+        ),
+        compiler="bin/cl.exe",
+        linker="bin/link.exe",
+        librarian="bin/lib.exe",
+        resource_compiler="bin/rc.exe",
+        required_producers=_MSVC60_PRODUCERS,
+        include_roots=("include", "mfc/include", "atl/include"),
+        library_roots=("lib", "mfc/lib"),
+        default_compile_options=_COMMON_OPTIONS,
+        capabilities=ToolchainCapabilities(
+            compiler_frontend_form="dynamic_library", pdb_generation="6.0"
+        ),
+        required_runtime_files=_MSVC60_RUNTIME,
     ),
 }
 
@@ -1171,6 +1219,7 @@ __all__ = [
     "MSVC_50_SP1",
     "MSVC_50_SP2",
     "MSVC_50_SP3",
+    "MSVC_60_SP6",
     "TOOLCHAIN_PROFILES",
     "TREE_RECEIPT_ALGORITHM",
     "ClassicMSVCToolchain",

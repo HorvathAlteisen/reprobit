@@ -6147,11 +6147,24 @@ def test_toolchain_option_names_are_consistent() -> None:
     assert doctor.toolchain_root == lock.toolchain_root == "tc"
 
 
+def test_vc6_profile_is_selectable_where_5_0_profiles_are() -> None:
+    parser = _parser()
+    init = parser.parse_args(["init", "--profile", "msvc_6_0_sp6"])
+    doctor = parser.parse_args(["doctor", "--profile", "msvc_6_0_sp6", "--toolchain-root", "tc"])
+    lock = parser.parse_args(
+        ["toolchain", "lock", "--profile", "msvc_6_0_sp6", "--toolchain-root", "tc"]
+    )
+
+    assert init.profile == doctor.toolchain_profile == lock.profile == "msvc_6_0_sp6"
+
+
+@pytest.mark.parametrize("profile", ("msvc_5_0_rtm", "msvc_6_0_sp6"))
 def test_toolchain_provision_lists_only_profiles_it_can_install(
     capsys: pytest.CaptureFixture[str],
+    profile: str,
 ) -> None:
     with pytest.raises(SystemExit) as stopped:
-        main(["toolchain", "provision", "msvc_5_0_rtm"])
+        main(["toolchain", "provision", profile])
 
     assert stopped.value.code == 2
     assert "invalid choice" in capsys.readouterr().err

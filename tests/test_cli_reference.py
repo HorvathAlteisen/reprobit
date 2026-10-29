@@ -57,6 +57,7 @@ def test_cli_reference_prefers_consistent_current_option_names() -> None:
     assert "--root" not in lock
     assert "{msvc_4_2}" in provision
     assert "msvc_5_0" not in provision
+    assert "msvc_6_0" not in provision
     assert "[project]" in export
     assert "--destination PROJECT_RELATIVE_DIRECTORY" in export
     assert "--refresh" in cmake_import

@@ -22,7 +22,7 @@ Every command also accepts `-h`/`--help`. The exit-status contract is in
 Start a ReproBit project.
 
 ```
-rbit init [-h] [--project-id PROJECT_ID] [--profile {msvc_4_2,msvc_5_0_rtm,msvc_5_0_sp1,msvc_5_0_sp2,msvc_5_0_sp3}] [--target NAME] [--artifact [TARGET=]PATH] [--oracle [TARGET=]PATH] [--logical-source DOS_PATH] [--logical-build DOS_PATH] [--logical-toolchain DOS_PATH] [project]
+rbit init [-h] [--project-id PROJECT_ID] [--profile {msvc_4_2,msvc_5_0_rtm,msvc_5_0_sp1,msvc_5_0_sp2,msvc_5_0_sp3,msvc_6_0_sp6}] [--target NAME] [--artifact [TARGET=]PATH] [--oracle [TARGET=]PATH] [--logical-source DOS_PATH] [--logical-build DOS_PATH] [--logical-toolchain DOS_PATH] [project]
 ```
 
 | Argument | Default | Description |
@@ -32,7 +32,7 @@ rbit init [-h] [--project-id PROJECT_ID] [--profile {msvc_4_2,msvc_5_0_rtm,msvc_
 | Argument | Default | Description |
 |---|---|---|
 | `--project-id` `PROJECT_ID` |  | portable project name (default: derive it from the directory) |
-| `--profile` `{msvc_4_2,msvc_5_0_rtm,msvc_5_0_sp1,msvc_5_0_sp2,msvc_5_0_sp3}` | `msvc_4_2` | compiler profile (default: msvc_4_2) |
+| `--profile` `{msvc_4_2,msvc_5_0_rtm,msvc_5_0_sp1,msvc_5_0_sp2,msvc_5_0_sp3,msvc_6_0_sp6}` | `msvc_4_2` | compiler profile (default: msvc_4_2) |
 | `--target` `NAME` |  | target name (repeatable; default: program) |
 | `--artifact` `[TARGET=]PATH` |  | rebuilt output path for one target, or TARGET=PATH when repeated (default: build/TARGET.exe) |
 | `--oracle` `[TARGET=]PATH` |  | original/reference path for one target, or TARGET=PATH when repeated (default: reference/TARGET.exe) |
@@ -79,7 +79,7 @@ rbit setup [-h] [--toolchain-root DIRECTORY] [--no-provision] [--no-save] [--ski
 Check this machine's backend and the selected compiler files.
 
 ```
-rbit doctor [-h] [--backend {auto,posix_wine_v1,windows_native_v1}] [--wine PATH_OR_NAME] [--wineserver PATH_OR_NAME] [--execute-probe] [--profile {msvc_4_2,msvc_5_0_rtm,msvc_5_0_sp1,msvc_5_0_sp2,msvc_5_0_sp3}] [--toolchain-root DIRECTORY] [project]
+rbit doctor [-h] [--backend {auto,posix_wine_v1,windows_native_v1}] [--wine PATH_OR_NAME] [--wineserver PATH_OR_NAME] [--execute-probe] [--profile {msvc_4_2,msvc_5_0_rtm,msvc_5_0_sp1,msvc_5_0_sp2,msvc_5_0_sp3,msvc_6_0_sp6}] [--toolchain-root DIRECTORY] [project]
 ```
 
 | Argument | Default | Description |
@@ -92,7 +92,7 @@ rbit doctor [-h] [--backend {auto,posix_wine_v1,windows_native_v1}] [--wine PATH
 | `--wine` `PATH_OR_NAME` | `wine` | POSIX Wine executable (default: wine from PATH) |
 | `--wineserver` `PATH_OR_NAME` | `wineserver` | POSIX wineserver executable (default: wineserver from PATH) |
 | `--execute-probe` |  | also run the bounded backend and isolation probe (including Wine when used) |
-| `--profile` `{msvc_4_2,msvc_5_0_rtm,msvc_5_0_sp1,msvc_5_0_sp2,msvc_5_0_sp3}` |  | compiler profile when checking an installation without a project |
+| `--profile` `{msvc_4_2,msvc_5_0_rtm,msvc_5_0_sp1,msvc_5_0_sp2,msvc_5_0_sp3,msvc_6_0_sp6}` |  | compiler profile when checking an installation without a project |
 | `--toolchain-root` `DIRECTORY` |  | compiler installation to authenticate (default: use the project's remembered compiler when available) |
 
 ### `rbit toolchain provision`
@@ -117,7 +117,7 @@ rbit toolchain provision [-h] [--destination DIRECTORY] [--no-save] [{msvc_4_2}]
 Record the exact compiler files this project expects.
 
 ```
-rbit toolchain lock [-h] [--profile {msvc_4_2,msvc_5_0_rtm,msvc_5_0_sp1,msvc_5_0_sp2,msvc_5_0_sp3}] [--toolchain-root DIRECTORY] [--runtime-file RELATIVE_PATH] [--output PROJECT_RELATIVE_PATH] [project]
+rbit toolchain lock [-h] [--profile {msvc_4_2,msvc_5_0_rtm,msvc_5_0_sp1,msvc_5_0_sp2,msvc_5_0_sp3,msvc_6_0_sp6}] [--toolchain-root DIRECTORY] [--runtime-file RELATIVE_PATH] [--output PROJECT_RELATIVE_PATH] [project]
 ```
 
 | Argument | Default | Description |
@@ -126,7 +126,7 @@ rbit toolchain lock [-h] [--profile {msvc_4_2,msvc_5_0_rtm,msvc_5_0_sp1,msvc_5_0
 
 | Argument | Default | Description |
 |---|---|---|
-| `--profile` `{msvc_4_2,msvc_5_0_rtm,msvc_5_0_sp1,msvc_5_0_sp2,msvc_5_0_sp3}` |  | compiler profile (default: read it from reprobit.toml) |
+| `--profile` `{msvc_4_2,msvc_5_0_rtm,msvc_5_0_sp1,msvc_5_0_sp2,msvc_5_0_sp3,msvc_6_0_sp6}` |  | compiler profile (default: read it from reprobit.toml) |
 | `--toolchain-root` `DIRECTORY` |  | compiler installation override (normally remembered by rbit setup) |
 | `--runtime-file` `RELATIVE_PATH` |  | pin an additional wrapper or runtime dependency (repeatable) |
 | `--output` `PROJECT_RELATIVE_PATH` |  | lock-file path without reprobit.toml (existing projects always use their configured path) |

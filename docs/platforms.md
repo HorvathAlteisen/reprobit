@@ -39,6 +39,6 @@ committed, cached, or uploaded.
 
 That gate proves the 4.2 host and compiler path, not a project's full byte-identity verdict from
 scratch. Project certification still needs the project's locked toolchain, reference data, and a
-fixture that builds from scratch on its intended host. ReproBit also recognizes MSVC 5.0 profiles,
-but they do not yet have
+fixture that builds from scratch on its intended host. ReproBit also recognizes MSVC 5.0 profiles
+and the MSVC 6.0 SP6 profile, but they do not yet have
 equivalent end-to-end public evidence.

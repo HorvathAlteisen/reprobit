@@ -17,9 +17,10 @@ The result is more than a matching checksum. ReproBit checks three separate clai
 3. the rebuilt program came from the declared source and toolchain, not bytes copied from the
    original executable.
 
-ReproBit is pre-release software. It recognizes profiles for Microsoft Visual C++ 4.2 and the
-5.0 releases. Current end-to-end evidence with the real compiler and native Windows CI covers
-4.2; the 5.0 profiles are modeled, but do not yet carry equivalent end-to-end proof. The shared
+ReproBit is pre-release software. It recognizes profiles for Microsoft Visual C++ 4.2, the
+5.0 releases, and 6.0 SP6. Current end-to-end evidence with the real compiler and native Windows CI
+covers 4.2; the 5.0 and 6.0 SP6 profiles are modeled, but do not yet carry equivalent end-to-end
+proof. The shared
 build, verification, reporting, and incremental pieces are designed to support more compiler
 families through reviewed library releases.
 

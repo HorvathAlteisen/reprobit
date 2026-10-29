@@ -23,6 +23,7 @@ from reprobit.toolchains import (
     MSVC_50_SP1,
     MSVC_50_SP2,
     MSVC_50_SP3,
+    MSVC_60_SP6,
     TOOLCHAIN_PROFILES,
     ClassicMSVCToolchain,
     ToolchainError,
@@ -37,6 +38,7 @@ _INTEGRATION_ROOTS = {
     MSVC_50_SP1: "REPROBIT_MSVC_5_0_SP1_ROOT",
     MSVC_50_SP2: "REPROBIT_MSVC_5_0_SP2_ROOT",
     MSVC_50_SP3: "REPROBIT_MSVC_5_0_SP3_ROOT",
+    MSVC_60_SP6: "REPROBIT_MSVC_6_0_SP6_ROOT",
 }
 
 
@@ -61,6 +63,7 @@ def test_all_classic_profiles_are_explicit_and_revision_pinned() -> None:
         MSVC_50_SP1,
         MSVC_50_SP2,
         MSVC_50_SP3,
+        MSVC_60_SP6,
     }
     assert TOOLCHAIN_PROFILES[MSVC_42].capabilities.compiler_frontend_form == "executable"
     assert TOOLCHAIN_PROFILES[MSVC_42].wine_dll_overrides == (
@@ -86,6 +89,16 @@ def test_all_classic_profiles_are_explicit_and_revision_pinned() -> None:
         assert profile.capabilities.compiler_frontend_form == "dynamic_library"
         assert len(profile.sources) == 1
         assert len(profile.sources[0].revision) == 40
+    msvc60 = TOOLCHAIN_PROFILES[MSVC_60_SP6]
+    assert msvc60.release == MsvcRelease.V6_SP6.value == "6.0-sp6"
+    assert msvc60.capabilities.compiler_frontend_form == "dynamic_library"
+    assert msvc60.capabilities.pdb_generation == "6.0"
+    assert len(msvc60.sources) == 1
+    assert len(msvc60.sources[0].revision) == 40
+    assert "bin/c2.dll" in msvc60.required_producers
+    assert "bin/mspdb60.dll" in msvc60.required_producers
+    assert msvc60.required_runtime_files == ("bin/rcdll.dll",)
+    assert msvc60.source_for_path("bin/cl.exe") == msvc60.sources[0]
 
 
 def test_toolchain_lock_detects_producer_drift(tmp_path: Path) -> None:

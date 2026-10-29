@@ -113,5 +113,5 @@ lifetime tests, and compiles through the real MSVC 4.2 child chain. It uploads
 only tests and diagnostic logs.
 
 This is end-to-end host evidence for MSVC 4.2. ReproBit recognizes MSVC 5.0 RTM
-and service-pack profiles, but those profiles do not yet have an equivalent
-public compiler-and-fixture gate.
+and service-pack profiles and the MSVC 6.0 SP6 profile, but those profiles do not
+yet have an equivalent public compiler-and-fixture gate.

@@ -372,6 +372,18 @@ def test_prepared_unit_binds_only_the_exact_msvc42_win32_i386_target(
     )
     assert classic_orchestration._classic_compiler_identity(wrong) is None
 
+    vc6 = bundle.model_copy(
+        update={
+            "spec": bundle.spec.model_copy(
+                update={"toolchain": ToolchainRef(profile="msvc_6_0_sp6")}
+            ),
+            "toolchain_lock": bundle.toolchain_lock.model_copy(
+                update={"profile": "msvc_6_0_sp6", "release": MsvcRelease.V6_SP6}
+            ),
+        }
+    )
+    assert classic_orchestration._classic_compiler_identity(vc6) is None
+
 
 @pytest.mark.skipif(os.name == "nt", reason="non-Windows host capability path")
 def test_native_direct_runtime_fails_closed_off_windows(

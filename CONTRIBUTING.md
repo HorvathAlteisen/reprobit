@@ -48,7 +48,7 @@ that fails when it is stale:
 - `tests/fixtures/`: small committed inputs such as `classic_smoke.cpp`.
 - Real-compiler tests skip themselves unless a toolchain root is configured in
   the environment: `REPROBIT_MSVC_4_2_ROOT` (and `REPROBIT_MSVC_5_0_*_ROOT`
-  for the modeled 5.0 profiles). Some additionally need Wine on POSIX, native
+  or `REPROBIT_MSVC_6_0_SP6_ROOT` for the modeled 5.0 and 6.0 SP6 profiles). Some additionally need Wine on POSIX, native
   Windows, or the `REPROBIT_MSVC42_PE_*`/`REPROBIT_MSVC42_PDB_*` fixture
   variables. A default run therefore reports a few dozen skips; that is
   expected.

@@ -12,6 +12,7 @@ from reprobit.toolchains import (
     MSVC_50_SP1,
     MSVC_50_SP2,
     MSVC_50_SP3,
+    MSVC_60_SP6,
 )
 from reprobit.user_config import (
     UserConfigError,
@@ -77,6 +78,7 @@ def test_missing_selected_root_is_actionable_and_never_silently_falls_through(
         (MSVC_50_SP1, "REPROBIT_MSVC_5_0_SP1_ROOT"),
         (MSVC_50_SP2, "REPROBIT_MSVC_5_0_SP2_ROOT"),
         (MSVC_50_SP3, "REPROBIT_MSVC_5_0_SP3_ROOT"),
+        (MSVC_60_SP6, "REPROBIT_MSVC_6_0_SP6_ROOT"),
     ),
 )
 def test_each_profile_uses_its_existing_environment_variable(
